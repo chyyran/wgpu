@@ -1,41 +1,11 @@
 [workspace]
 resolver = "2"
 members = [
-    "cts_runner",
-    "deno_webgpu",
-
-    # default members
-    "d3d12",
-    "examples/",
-    "naga-cli",
     "naga",
-    "naga/fuzz",
-    "naga/hlsl-snapshots",
-    "player",
-    "tests",
-    "wgpu-core",
-    "wgpu-hal",
-    "wgpu-info",
-    "wgpu-macros",
-    "wgpu-types",
-    "wgpu",
 ]
 exclude = []
-default-members = [
-    "d3d12",
-    "examples/",
-    "naga-cli",
+default_members = [
     "naga",
-    "naga/fuzz",
-    "naga/hlsl-snapshots",
-    "player",
-    "tests",
-    "wgpu-core",
-    "wgpu-hal",
-    "wgpu-info",
-    "wgpu-macros",
-    "wgpu-types",
-    "wgpu",
 ]
 
 [workspace.package]
@@ -63,7 +33,7 @@ package = "wgpu-hal"
 path = "./wgpu-hal"
 version = "0.18.0"
 
-[workspace.dependencies.naga]
+[workspace.dependencies.librashader-naga]
 path = "./naga"
 version = "0.14.0"
 

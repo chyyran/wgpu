@@ -1,5 +1,8 @@
 # Naga
 
+Fork of [naga](https://github.com/gfx-rs/wgpu/tree/trunk/naga) to allow remapping of combined image samplers in spv-in. Used as an implementation detail in librashader.
+
+
 [![Matrix](https://img.shields.io/badge/Matrix-%23naga%3Amatrix.org-blueviolet.svg)](https://matrix.to/#/#naga:matrix.org)
 [![Crates.io](https://img.shields.io/crates/v/naga.svg?label=naga)](https://crates.io/crates/naga)
 [![Docs.rs](https://docs.rs/naga/badge.svg)](https://docs.rs/naga)

@@ -1,5 +1,5 @@
 [package]
-name = "naga"
+name = "librashader-naga"
 version = "0.14.0"
 authors = ["gfx-rs developers"]
 edition = "2021"
@@ -68,7 +68,6 @@ criterion = { version = "0.5", features = [] }
 bincode = "1"
 diff = "0.1"
 env_logger = "0.10"
-hlsl-snapshots = { version = "0.1.0", path = "./hlsl-snapshots" }
 # Require at least version 0.7.1 of ron, this version changed how floating points are
 # serialized by forcing them to always have the decimal part, this makes it backwards
 # incompatible with our tests because we do a syntatic diff and not a semantic one.
