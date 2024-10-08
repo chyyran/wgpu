@@ -1,4 +1,5 @@
 use super::Error;
+use crate::back::wgsl::polyfill::PolyfillOverload;
 use crate::{
     back::{self, Baked},
     proc::{self, ExpressionKindTracker, NameKey},
@@ -1653,6 +1654,7 @@ impl<W: Write> Writer<W> {
 
                 enum Function {
                     Regular(&'static str),
+                    Polyfill(PolyfillOverload),
                 }
 
                 let function = match fun {
@@ -1736,8 +1738,14 @@ impl<W: Write> Writer<W> {
                     Mf::Unpack2x16float => Function::Regular("unpack2x16float"),
                     Mf::Unpack4xI8 => Function::Regular("unpack4xI8"),
                     Mf::Unpack4xU8 => Function::Regular("unpack4xU8"),
-                    Mf::Inverse | Mf::Outer => {
-                        return Err(Error::UnsupportedMathFunction(fun));
+                    mf @ Mf::Inverse | mf @ Mf::Outer => {
+                        let typ = func_ctx.resolve_type(arg, &module.types);
+
+                        let Some(overload) = PolyfillOverload::find_overload(mf, typ) else {
+                            return Err(Error::UnsupportedMathFunction(fun));
+                        };
+
+                        Function::Polyfill(overload)
                     }
                 };
 
@@ -1750,6 +1758,9 @@ impl<W: Write> Writer<W> {
                             self.write_expr(module, arg, func_ctx)?;
                         }
                         write!(self.out, ")")?
+                    }
+                    Function::Polyfill(fun_name) => {
+                        todo!()
                     }
                 }
             }
